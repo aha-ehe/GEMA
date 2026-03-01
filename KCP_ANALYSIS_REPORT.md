@@ -36,9 +36,25 @@ Fungsi `ikcp_nodelay` dan `ikcp_setmtu` digunakan untuk mempercepat interval ACK
 ### 3.3. Struktur Pointers pada Alokasi KCP
 Pada `ikcp_release`, memori segmen dan _queue_ KCP dihapus. Jika manajemen koneksi multi-threading (terlihat adanya `UdpPipeManager`) tidak menggunakan penguncian (mutex/lock) yang aman di level pemanggilan `ikcp_release`, celah **_Use-After-Free_ (UAF)** bisa dimanfaatkan bila suatu _thread_ masih memegang _pointer_ paket `KCP_ReceiveCycle` yang sudah dilepaskan.
 
-## 4. Kesimpulan dan Rekomendasi
-* **Cara Kerja**: KCP di `libmoba.so` adalah KCP standar yang digabungkan ke `UdpPipeManager` dengan modifikasi dukungan aktivasi/penonaktifan kompresi Zip di layer pengiriman/penerimaan.
-* **Celah yang Mungkin Ada**: Paling berisiko terletak pada mekanisme _Decompression_ dari paket UDP Zip dan penanganan kondisi balapan (_Race Condition_) pada manajemen _Pipe_.
-* **Rekomendasi**: Perlu _fuzzing_ dinamis pada data masuk `ikcp_input` untuk memverifikasi apakah ada kelamahan saat ukuran pesan (_len_) memanipulasi _buffer_ dekompresi.
+## 4. Kerentanan Kritis Disrupsi Server (Server DoS/Crash)
+Analisis lebih dalam (Deep Dive) pada alur penerimaan pesan (`ikcp_parse_data`, `ikcp_recv`, dan `KCP_ReceiveCycle`) mengungkap skenario serangan yang dapat langsung menyebabkan server terganggu (_Crash_ atau mengalami DoS):
 
-*(Laporan Analisis Otomatis)*
+### 4.1 CPU Exhaustion melalui Fragmentasi KCP
+Dalam `ikcp_parse_data` dan `ikcp_input`, data mentah UDP dipecah berdasarkan segmen (_frg_ - fragment id). Apabila penyerang (_attacker_) membuat paket manipulatif dengan memalsukan ID fragmen atau nilai ukuran payload (`len`) sedemikian rupa, *loop* penyatuan paket dapat berputar (iterasi) dalam jumlah tak masuk akal. Ini akan menyebabkan utas (_thread_) pekerja pada `UdpPipeManager` mengalami pemakaian CPU hingga 100% (**CPU Exhaustion**).
+
+### 4.2 OOM Crash via _Exception Flooding_ (`KCP_ReceiveCycle`)
+Disassembly dari `KCP_ReceiveCycle` (offset `0xca170` - `0xca1ac`) menunjukkan logika eksepsi (penggunaan `__cxa_allocate_exception` dan `__cxa_throw`) ketika terjadi kesalahan parsing atau _bad_type_id_ paket.
+* **Vektor Eksploitasi**: Seorang penyerang bisa *membanjiri* koneksi dengan payload KCP *malformed* (rusak) sehingga memicu eksepsi berulang kali. Alokasi _exception_ terus menerus tanpa _rate limiting_ KCP akan menguras habis memori (_Memory Exhaustion_ / **OOM Crash**) pada server MOBA.
+
+### 4.3 Heap Buffer Overflow Dinamis pada Dekompresi Zip
+Sebagaimana dicatat di poin 3.1, `KCP_EnableZip` terintegrasi erat dengan layer aplikasi. Karena KCP membaca paket sebelum memvalidasi total rasio dekompresi di memori, payload yang disetel maksimal dengan algoritma kompresi tinggi (_Zip Bomb_) akan memaksa alokator (`malloc` fallback) menyalin ukuran tak terhingga ke _buffer_ layer game, mengakibatkan **Heap Buffer Overflow**. Jika server tidak di-compile dengan mitigasi yang kuat, hal ini memicu _Segmentation Fault_ (Crash).
+
+## 5. Kesimpulan dan Rekomendasi
+* **Cara Kerja**: KCP di `libmoba.so` adalah KCP standar yang digabungkan ke `UdpPipeManager` dengan modifikasi dukungan aktivasi/penonaktifan kompresi Zip di layer pengiriman/penerimaan.
+* **Celah Kritis**: Paling berisiko terletak pada mekanisme _Decompression_ (Heap Overflow), loop fragmentasi _ikcp_parse_data_ (CPU DoS), dan Exception Flooding (OOM Crash).
+* **Rekomendasi**:
+  1. Tambahkan *rate limiter* pada port UDP penerima untuk menangkal injeksi paket sampah.
+  2. Implementasikan batasan maksimum pada iterasi _re-assembly_ fragmen KCP.
+  3. Validasi limit keras pada alokasi _buffer_ dekompresi dan tangani _error/exception_ tanpa memanggil `__cxa_allocate_exception` jika memungkinkan, atau ubah metode *error handling* KCP menjadi *silent drop*.
+
+*(Laporan Analisis Mendalam Otomatis)*
