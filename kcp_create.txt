@@ -1,0 +1,154 @@
+            ; UNKNOWN XREF from aav.0x00012400 @ +0xea8
+┌ 508: sym.ikcp_create (int64_t arg1, int64_t arg2);
+│           ; var int64_t var_30h @ sp+0x0
+│           ; var int64_t var_30h_2 @ sp+0x8
+│           ; var int64_t var_10h @ sp+0x10
+│           ; var int64_t var_10h_2 @ sp+0x18
+│           ; var int64_t var_20h @ sp+0x20
+│           ; var int64_t var_20h_2 @ sp+0x28
+│           ; arg int64_t arg1 @ x0
+│           ; arg int64_t arg2 @ x1
+│           0x000ce300      fd7bbda9       stp x29, x30, [var_30h]!
+│           0x000ce304      f65701a9       stp x22, x21, [var_10h]
+│           0x000ce308      fd030091       mov x29, sp
+│           0x000ce30c      f44f02a9       stp x20, x19, [var_20h]
+│           0x000ce310      160800b0       adrp x22, 0x1cf000
+│           0x000ce314      f40301aa       mov x20, x1                 ; arg2
+│           0x000ce318      f503002a       mov w21, w0                 ; arg1
+│           0x000ce31c      00a78052       movz w0, aav.0x00000538
+│           0x000ce320      c8e645f9       ldr x8, [x22, aav.0x00000bc8] ; 0xdd
+│       ┌─< 0x000ce324      280100b4       cbz x8, 0xce348
+│       │   0x000ce328      00013fd6       blr x8
+│       │   0x000ce32c      f30300aa       mov x19, x0
+│      ┌──< 0x000ce330      200100b5       cbnz x0, 0xce354
+│      ││   ; CODE XREF from sym.ikcp_create @ 0xce350
+│     ┌───> 0x000ce334      e00313aa       mov x0, x19
+│     ╎││   0x000ce338      f44f42a9       ldp x20, x19, [var_20h]
+│     ╎││   0x000ce33c      f65741a9       ldp x22, x21, [var_10h]
+│     ╎││   0x000ce340      fd7bc3a8       ldp x29, x30, [sp], 0x30
+│     ╎││   0x000ce344      c0035fd6       ret
+│     ╎││   ; CODE XREF from sym.ikcp_create @ 0xce324
+│     ╎│└─> 0x000ce348      06a90394       bl sym.imp.malloc           ;  void *malloc(size_t size)
+│     ╎│    0x000ce34c      f30300aa       mov x19, x0
+│     └───< 0x000ce350      20ffffb4       cbz x0, 0xce334
+│      │    ; CODE XREF from sym.ikcp_create @ 0xce330
+│      └──> 0x000ce354      c80700d0       adrp x8, 0x1c8000
+│           0x000ce358      c90700d0       adrp x9, 0x1c8000
+│           0x000ce35c      750200b9       str w21, [x19]
+│           0x000ce360      ca0700d0       adrp x10, 0x1c8000
+│           0x000ce364      085943f9       ldr x8, [x8, aav.0x000006b0] ; 0xcf
+│           0x000ce368      295d43f9       ldr x9, aav.0x000000d0
+│           0x000ce36c      746e00f9       str x20, [x19, 0xd8]
+│           0x000ce370      7ffe0e29       stp wzr, wzr, [x19, 0x74]
+│           0x000ce374      080140b9       ldr w8, [x8]                ; 0xcf
+│           0x000ce378      290140b9       ldr w9, [x9]                ; aav.0x000000d0
+│                                                                      ; 0xd0
+│           0x000ce37c      4a5143f9       ldr x10, [x10, aav.0x000006a0] ; 0xd1
+│           0x000ce380      68260729       stp w8, w9, [x19, 0x38]
+│           0x000ce384      c80700d0       adrp x8, 0x1c8000
+│           0x000ce388      085543f9       ldr x8, [x8, aav.0x000006a8] ; 0xcf
+│           0x000ce38c      694200b9       str w9, [x19, 0x40]
+│           0x000ce390      4a0140b9       ldr w10, [x10]              ; 0xd1
+│           0x000ce394      e9fcfff0       adrp x9, 0x6d000
+│           0x000ce398      7f7e01a9       stp xzr, xzr, [x19, 0x10]
+│           0x000ce39c      080140b9       ldr w8, [x8]                ; 0xcf
+│           0x000ce3a0      7f2200b9       str wzr, [x19, 0x20]
+│           0x000ce3a4      209d43fd       ldr d0, aav.0x000000d0
+│           0x000ce3a8      7f8200b9       str wzr, [x19, 0x80]
+│           0x000ce3ac      7ff200b9       str wzr, [x19, 0xf0]
+│           0x000ce3b0      0b010a0b       add w11, w8, w10
+│           0x000ce3b4      4901084b       sub w9, w10, w8
+│           0x000ce3b8      c8e645f9       ldr x8, [x22, aav.0x00000bc8] ; 0xdd
+│           0x000ce3bc      604204fc       stur d0, [x19, 0x44]
+│           0x000ce3c0      60050b0b       add w0, w11, w11, lsl 1
+│           0x000ce3c4      6aa60029       stp w10, w9, [x19, 4]
+│       ┌─< 0x000ce3c8      e80600b4       cbz x8, 0xce4a4
+│       │   0x000ce3cc      00013fd6       blr x8
+│       │   0x000ce3d0      607200f9       str x0, [x19, 0xe0]
+│      ┌──< 0x000ce3d4      e00600b4       cbz x0, 0xce4b0
+│      ││   ; CODE XREF from sym.ikcp_create @ 0xce4ac
+│     ┌───> 0x000ce3d8      69620291       add x9, x19, 0x98           ; 0x5d0
+│     ╎││                                                              ; aav.0x000005d0
+│     ╎││   0x000ce3dc      6aa20291       add x10, x19, 0xa8          ; 0x5e0
+│     ╎││                                                              ; aav.0x000005e0
+│     ╎││   0x000ce3e0      68220291       add x8, x19, 0x88           ; 0x5c0
+│     ╎││                                                              ; aav.0x000005c0
+│     ╎││   0x000ce3e4      60220491       add x0, x19, aav.0x00000108 ; 0x640
+│     ╎││                                                              ; aav.0x00000640 ; void *s
+│     ╎││   0x000ce3e8      00e4006f       movi v0.2d, 0000000000000000
+│     ╎││   0x000ce3ec      e1031f2a       mov w1, wzr
+│     ╎││   0x000ce3f0      69a609a9       stp x9, x9, [x19, 0x98]
+│     ╎││   0x000ce3f4      c90700d0       adrp x9, 0x1c8000
+│     ╎││   0x000ce3f8      6aaa0aa9       stp x10, x10, [x19, 0xa8]
+│     ╎││   0x000ce3fc      ca0700d0       adrp x10, 0x1c8000
+│     ╎││   0x000ce400      68a208a9       stp x8, x8, [x19, 0x88]
+│     ╎││   0x000ce404      68e20291       add x8, x19, 0xb8           ; 0x5f0
+│     ╎││                                                              ; aav.0x000005f0
+│     ╎││   0x000ce408      296143f9       ldr x9, aav.0x000000d0
+│     ╎││   0x000ce40c      02848052       movz w2, aav.0x00000420
+│     ╎││   0x000ce410      4a6543f9       ldr x10, [x10, aav.0x000006c8] ; 0xd1
+│     ╎││   0x000ce414      7f0e00b9       str wzr, [x19, 0xc]
+│     ╎││   0x000ce418      68a20ba9       stp x8, x8, [x19, 0xb8]
+│     ╎││   0x000ce41c      280140b9       ldr w8, [x9]                ; aav.0x000000d0
+│     ╎││                                                              ; 0xd0
+│     ╎││   0x000ce420      601600fd       str d0, [x19, 0x28]
+│     ╎││   0x000ce424      490140b9       ldr w9, [x10]               ; 0xd1
+│     ╎││   0x000ce428      7f4206f8       stur xzr, [x19, 0x64]
+│     ╎││   0x000ce42c      68260629       stp w8, w9, [x19, 0x30]
+│     ╎││   0x000ce430      c80700d0       adrp x8, 0x1c8000
+│     ╎││   0x000ce434      c90700d0       adrp x9, 0x1c8000
+│     ╎││   0x000ce438      086943f9       ldr x8, [x8, aav.0x000006d0] ; 0xcf
+│     ╎││   0x000ce43c      296d43f9       ldr x9, aav.0x000000d0
+│     ╎││   0x000ce440      7fc205f8       stur xzr, [x19, 0x5c]
+│     ╎││   0x000ce444      7ffe0ca9       stp xzr, xzr, [x19, 0xc8]
+│     ╎││   0x000ce448      080140b9       ldr w8, [x8]                ; 0xcf
+│     ╎││   0x000ce44c      290140b9       ldr w9, [x9]                ; aav.0x000000d0
+│     ╎││                                                              ; 0xd0
+│     ╎││   0x000ce450      7fa20929       stp wzr, w8, [x19, 0x4c]
+│     ╎││   0x000ce454      692600b9       str w9, [x19, 0x24]
+│     ╎││   0x000ce458      c90700d0       adrp x9, 0x1c8000
+│     ╎││   0x000ce45c      297143f9       ldr x9, aav.0x000000d0
+│     ╎││   0x000ce460      60c206fc       stur d0, [x19, 0x6c]
+│     ╎││   0x000ce464      7ff600b9       str wzr, [x19, 0xf4]
+│     ╎││   0x000ce468      607600fd       str d0, [x19, 0xe8]
+│     ╎││   0x000ce46c      290140b9       ldr w9, [x9]                ; aav.0x000000d0
+│     ╎││                                                              ; 0xd0
+│     ╎││   0x000ce470      68fe0a29       stp w8, wzr, [x19, 0x54]
+│     ╎││   0x000ce474      7ffe0fa9       stp xzr, xzr, [x19, 0xf8]
+│     ╎││   0x000ce478      697e00b9       str w9, [x19, 0x7c]
+│     ╎││   0x000ce47c      79a70394       bl sym.imp.memset           ; void *memset(void *s, int c, size_t n)
+│     ╎││   0x000ce480      00e4006f       movi v0.2d, 0000000000000000
+│     ╎││   0x000ce484      28048052       movz w8, 0x21               ; '!'
+│     ╎││   0x000ce488      683205b9       str w8, [x19, 0x530]
+│     ╎││   0x000ce48c      609602fd       str d0, [x19, aav.0x00000528]
+│     ╎││   0x000ce490      e00313aa       mov x0, x19
+│     ╎││   0x000ce494      f44f42a9       ldp x20, x19, [var_20h]
+│     ╎││   0x000ce498      f65741a9       ldp x22, x21, [var_10h]
+│     ╎││   0x000ce49c      fd7bc3a8       ldp x29, x30, [sp], 0x30
+│     ╎││   0x000ce4a0      c0035fd6       ret
+│     ╎││   ; CODE XREF from sym.ikcp_create @ 0xce3c8
+│     ╎│└─> 0x000ce4a4      afa80394       bl sym.imp.malloc           ;  void *malloc(size_t size)
+│     ╎│    0x000ce4a8      607200f9       str x0, [x19, 0xe0]
+│     └───< 0x000ce4ac      60f9ffb5       cbnz x0, 0xce3d8
+│      │    ; CODE XREF from sym.ikcp_create @ 0xce3d4
+│      └──> 0x000ce4b0      080800b0       adrp x8, 0x1cf000
+│           0x000ce4b4      08e945f9       ldr x8, [x8, aav.0x00000bd0] ; 0xcf
+│       ┌─< 0x000ce4b8      280100b4       cbz x8, 0xce4dc
+│       │   0x000ce4bc      e00313aa       mov x0, x19
+│       │   0x000ce4c0      00013fd6       blr x8
+│       │   0x000ce4c4      f3031faa       mov x19, xzr
+│       │   0x000ce4c8      e00313aa       mov x0, x19
+│       │   ; CODE XREF from aav.0x00026000 @ +0x1b04
+│       │   0x000ce4cc      f44f42a9       ldp x20, x19, [var_20h]
+│       │   0x000ce4d0      f65741a9       ldp x22, x21, [var_10h]
+│       │   0x000ce4d4      fd7bc3a8       ldp x29, x30, [sp], 0x30
+│       │   0x000ce4d8      c0035fd6       ret
+│       │   ; CODE XREF from sym.ikcp_create @ 0xce4b8
+│       └─> 0x000ce4dc      e00313aa       mov x0, x19                 ; void *ptr
+│           0x000ce4e0      b0a80394       bl sym.imp.free             ; void free(void *ptr)
+│           0x000ce4e4      f3031faa       mov x19, xzr
+│           0x000ce4e8      e00313aa       mov x0, x19
+│           0x000ce4ec      f44f42a9       ldp x20, x19, [var_20h]
+│           0x000ce4f0      f65741a9       ldp x22, x21, [var_10h]
+│           0x000ce4f4      fd7bc3a8       ldp x29, x30, [sp], 0x30
+└           0x000ce4f8      c0035fd6       ret

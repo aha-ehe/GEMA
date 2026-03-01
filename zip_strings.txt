@@ -1,0 +1,28 @@
+g_SevenZipSOLoaderObject
+KCP_EnableZip
+g_bEnableZip
+KCP_IsZipEnabled
+KCP_SetZipControlCode
+g_iZipControlCode
+KCP_GetZipControlCode
+SevenZip_SetupCallback_OnStart
+g_SevenZipCallback_OnStart
+SevenZip_SetupCallback_OnGetFileNum
+g_SevenZipCallback_OnGetFileNum
+SevenZip_SetupCallback_OnProgress
+g_SevenZipCallback_OnProgress
+SevenZip_SetupCallback_OnError
+g_SevenZipCallback_OnError
+SevenZip_SetupCallback_OnSuccess
+g_SevenZipCallback_OnSuccess
+SevenZip_Callback_OnStart
+SevenZip_Callback_OnGetFileNum
+SevenZip_Callback_OnProgress
+SevenZip_Callback_OnError
+SevenZip_Callback_OnSuccess
+SevenZip_ExtractFile
+_ExtractFile, lib7zip.so is NULL
+com/moba/sevenzip/SevenZipSOLoader
+[lib7zip.so is NULL]
+error %d with zipfile in unzGetGlobalInfo
+ unzip 1.01 Copyright 1998-2004 Gilles Vollant - http://www.winimage.com/zLibDll

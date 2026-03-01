@@ -1,0 +1,40 @@
+            ; UNKNOWN XREF from aav.0x0000c430 @ +0x500
+┌ 268: sym.KCP_ReceiveCycle ();
+│           ; var int64_t var_10h_3 @ sp+0x10
+│           ; var int64_t var_20h_3 @ sp+0x20
+│           0x000ca0d4      fd7bbda9       stp x29, x30, [sp, -0x30]!
+│           0x000ca0d8      f65701a9       stp x22, x21, [sp, 0x10]
+│           0x000ca0dc      fd030091       mov x29, sp
+│           0x000ca0e0      f44f02a9       stp x20, x19, [sp, 0x20]
+│           0x000ca0e4      f40700d0       adrp x20, 0x1c8000
+│           0x000ca0e8      944243f9       ldr x20, [x20, aav.0x00000680] ; 0xdb
+│           0x000ca0ec      955a40a9       ldp x21, x22, [x20]
+│           ; CODE XREF from sym.KCP_ReceiveCycle @ 0xca12c
+│     ┌┌┌─> 0x000ca0f0      df0215eb       cmp x22, x21
+│    ┌────< 0x000ca0f4      e0010054       b.eq 0xca130
+│    │╎╎╎   0x000ca0f8      d3825ff8       ldur x19, [x22, -8]         ; 0xdd
+│    │╎╎╎   0x000ca0fc      d64200d1       sub x22, x22, 0x10
+│    │└───< 0x000ca100      93ffffb4       cbz x19, 0xca0f0
+│    │ ╎╎   0x000ca104      61220091       add x1, x19, 8
+│    │ ╎╎   0x000ca108      00008092       movn x0, 0
+│    │ ╎╎   0x000ca10c      4db50394       bl fcn.001b7640
+│    │ └──< 0x000ca110      00ffffb5       cbnz x0, 0xca0f0
+│    │  ╎   0x000ca114      680240f9       ldr x8, [x19]               ; 0xda
+│    │  ╎   0x000ca118      e00313aa       mov x0, x19
+│    │  ╎   0x000ca11c      080940f9       ldr x8, [x8, 0x10]          ; 0xcf
+│    │  ╎   ; CODE XREF from aav.0x00026000 @ +0x1987c
+│    │  ╎   0x000ca120      00013fd6       blr x8
+│    │  ╎   0x000ca124      e00313aa       mov x0, x19
+│    │  ╎   0x000ca128      cab60394       bl fcn.001b7c50
+│    │  └─< 0x000ca12c      f1ffff17       b 0xca0f0
+│    └────> 0x000ca130      e80700d0       adrp x8, 0x1c8000
+│           0x000ca134      083143f9       ldr x8, [x8, aav.0x00000660] ; 0xcf
+│           0x000ca138      950600f9       str x21, [x20, 8]
+│           0x000ca13c      000140f9       ldr x0, [x8]                ; 0xcf
+│       ┌─< 0x000ca140      800100b4       cbz x0, 0xca170
+│       │   0x000ca144      f30700d0       adrp x19, 0x1c8000
+│       │   0x000ca148      734243f9       ldr x19, [x19, aav.0x00000680] ; 0xda
+│       │   0x000ca14c      e10313aa       mov x1, x19
+│       │   0x000ca150      bcb60394       bl fcn.001b7c40
+│       │   0x000ca154      692240a9       ldp x9, x8, [x19]
+│       │   0x000ca158      080109cb       sub x8, x8, x9

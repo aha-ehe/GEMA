@@ -1,0 +1,240 @@
+            ; UNKNOWN XREF from aav.0x00004574 @ +0x169c
+┌ 756: sym.ikcp_send (int64_t arg1, int64_t arg2, signed int64_t arg3, int64_t arg4);
+│           ; var int64_t var_60h @ sp+0x0
+│           ; var int64_t var_60h_2 @ sp+0x8
+│           ; var int64_t var_10h @ sp+0x10
+│           ; var int64_t var_10h_2 @ sp+0x18
+│           ; var int64_t var_20h @ sp+0x20
+│           ; var int64_t var_20h_2 @ sp+0x28
+│           ; var int64_t var_30h @ sp+0x30
+│           ; var int64_t var_30h_2 @ sp+0x38
+│           ; var int64_t var_40h @ sp+0x40
+│           ; var int64_t var_40h_2 @ sp+0x48
+│           ; var int64_t var_50h @ sp+0x50
+│           ; var int64_t var_50h_2 @ sp+0x58
+│           ; arg int64_t arg1 @ x0
+│           ; arg int64_t arg2 @ x1
+│           ; arg signed int64_t arg3 @ x2
+│           ; arg int64_t arg4 @ x3
+│           0x000ceb0c      fd7bbaa9       stp x29, x30, [var_60h]!
+│           0x000ceb10      fc6f01a9       stp x28, x27, [var_10h]
+│           0x000ceb14      fd030091       mov x29, sp
+│           0x000ceb18      fa6702a9       stp x26, x25, [var_20h]
+│           0x000ceb1c      f85f03a9       stp x24, x23, [var_30h]
+│           0x000ceb20      f65704a9       stp x22, x21, [var_40h]
+│           0x000ceb24      f44f05a9       stp x20, x19, [var_50h]
+│           0x000ceb28      5f040071       cmp w2, 1                   ; arg3
+│       ┌─< 0x000ceb2c      8b030054       b.lt 0xceb9c
+│       │   0x000ceb30      f303032a       mov w19, w3                 ; arg4
+│       │   0x000ceb34      f403022a       mov w20, w2                 ; arg3
+│       │   0x000ceb38      f60301aa       mov x22, x1                 ; arg2
+│       │   0x000ceb3c      f50300aa       mov x21, x0                 ; arg1
+│       │   0x000ceb40      08f040b9       ldr w8, [x0, 0xf0]          ; 0xc7 ; arg1
+│      ┌──< 0x000ceb44      28080034       cbz w8, 0xcec48
+│      ││   0x000ceb48      f90315aa       mov x25, x21
+│      ││   0x000ceb4c      288f48f8       ldr x8, [x25, 0x88]!        ; aav.0x000000e0
+│      ││                                                              ; 0xe0
+│      ││   0x000ceb50      3f0308eb       cmp x25, x8
+│     ┌───< 0x000ceb54      a0070054       b.eq 0xcec48
+│     │││   0x000ceb58      b74a40f9       ldr x23, [x21, 0x90]        ; aav.0x000000dc
+│     │││                                                              ; 0xdc
+│     │││   0x000ceb5c      a90a40b9       ldr w9, [x21, 8]            ; aav.0x000000dc
+│     │││                                                              ; 0xdc
+│     │││   0x000ceb60      e82e40b9       ldr w8, [x23, 0x2c]         ; 0xde
+│     │││   0x000ceb64      2901086b       subs w9, w9, w8
+│    ┌────< 0x000ceb68      09070054       b.ls 0xcec48
+│    ││││   0x000ceb6c      3f01146b       cmp w9, w20
+│    ││││   0x000ceb70      0a0800b0       adrp x10, 0x1cf000
+│    ││││   0x000ceb74      9ac2891a       csel w26, w20, w9, gt
+│    ││││   0x000ceb78      4803080b       add w8, w26, w8
+│    ││││   0x000ceb7c      097d4093       sxtw x9, w8
+│    ││││   0x000ceb80      48e545f9       ldr x8, [x10, aav.0x00000bc8] ; 0xd1
+│    ││││   0x000ceb84      20410191       add x0, x9, 0x50
+│   ┌─────< 0x000ceb88      e80000b4       cbz x8, 0xceba4
+│   │││││   0x000ceb8c      00013fd6       blr x8
+│   │││││   0x000ceb90      f80300aa       mov x24, x0
+│  ┌──────< 0x000ceb94      e00000b5       cbnz x0, 0xcebb0
+│ ┌───────< 0x000ceb98      34000014       b 0xcec68
+│ │││││││   ; CODE XREF from sym.ikcp_send @ 0xceb2c
+│ ││││││└─> 0x000ceb9c      00008012       movn w0, 0
+│ ││││││┌─< 0x000ceba0      91000014       b 0xcede4
+│ │││││││   ; CODE XREF from sym.ikcp_send @ 0xceb88
+│ ││└─────> 0x000ceba4      efa60394       bl sym.imp.malloc           ;  void *malloc(size_t size)
+│ ││ ││││   0x000ceba8      f80300aa       mov x24, x0
+│ ││┌─────< 0x000cebac      e00500b4       cbz x0, 0xcec68
+│ │││││││   ; CODE XREF from sym.ikcp_send @ 0xceb94
+│ │└──────> 0x000cebb0      a84a40f9       ldr x8, [x21, 0x90]         ; aav.0x000000dc
+│ │ │││││                                                              ; 0xdc
+│ │ │││││   0x000cebb4      00230191       add x0, x24, 0x48           ; void *s1
+│ │ │││││   0x000cebb8      e1220191       add x1, x23, 0x48           ; const void *s2
+│ │ │││││   0x000cebbc      e22e40b9       ldr w2, [x23, 0x2c]         ; 0xde
+│ │ │││││   0x000cebc0      192300a9       stp x25, x8, [x24]
+│ │ │││││   0x000cebc4      180100f9       str x24, [x8]
+│ │ │││││   0x000cebc8      b84a00f9       str x24, [x21, 0x90]
+│ │ │││││   0x000cebcc      09a30394       bl sym.imp.memcpy           ; void *memcpy(void *s1, const void *s2, size_t n)
+│ │┌──────< 0x000cebd0      360100b4       cbz x22, 0xcebf4
+│ │││││││   0x000cebd4      e82e40b9       ldr w8, [x23, 0x2c]         ; 0xde
+│ │││││││   0x000cebd8      597f4093       sxtw x25, w26
+│ │││││││   0x000cebdc      e10316aa       mov x1, x22                 ; const void *s2
+│ │││││││   0x000cebe0      e20319aa       mov x2, x25                 ; size_t n
+│ │││││││   0x000cebe4      0803088b       add x8, x24, x8
+│ │││││││   0x000cebe8      00210191       add x0, x8, 0x48            ; void *s1
+│ │││││││   0x000cebec      01a30394       bl sym.imp.memcpy           ; void *memcpy(void *s1, const void *s2, size_t n)
+│ │││││││   0x000cebf0      d602198b       add x22, x22, x25
+│ │││││││   ; CODE XREF from sym.ikcp_send @ 0xcebd0
+│ │└──────> 0x000cebf4      e92240a9       ldp x9, x8, [x23]
+│ │ │││││   0x000cebf8      94021a4b       sub w20, w20, w26
+│ │ │││││   0x000cebfc      e00317aa       mov x0, x23
+│ │ │││││   0x000cec00      ea2e40b9       ldr w10, [x23, 0x2c]        ; 0xde
+│ │ │││││   0x000cec04      1f1b00b9       str wzr, [x24, 0x18]
+│ │ │││││   0x000cec08      280500f9       str x8, [x9, 8]
+│ │ │││││   0x000cec0c      e80640f9       ldr x8, [x23, 8]            ; 0xde
+│ │ │││││   0x000cec10      090100f9       str x9, [x8]
+│ │ │││││   0x000cec14      080800b0       adrp x8, 0x1cf000
+│ │ │││││   0x000cec18      f75e00a9       stp x23, x23, [x23]
+│ │ │││││   0x000cec1c      49011a0b       add w9, w10, w26
+│ │ │││││   0x000cec20      08e945f9       ldr x8, [x8, aav.0x00000bd0] ; 0xcf
+│ │ │││││   0x000cec24      09ff0529       stp w9, wzr, [x24, 0x2c]
+│ │┌──────< 0x000cec28      a80000b4       cbz x8, 0xcec3c
+│ │││││││   0x000cec2c      00013fd6       blr x8
+│ │││││││   0x000cec30      9f060071       cmp w20, 1
+│ ────────< 0x000cec34      aa000054       b.ge 0xcec48
+│ ────────< 0x000cec38      6a000014       b 0xcede0
+│ │││││││   ; CODE XREF from sym.ikcp_send @ 0xcec28
+│ │└──────> 0x000cec3c      d9a60394       bl sym.imp.free             ; void free(void *ptr)
+│ │ │││││   0x000cec40      9f060071       cmp w20, 1
+│ │┌──────< 0x000cec44      eb0c0054       b.lt 0xcede0
+│ │││││││   ; CODE XREFS from sym.ikcp_send @ 0xceb44, 0xceb54, 0xceb68, 0xcec34
+│ ───└└└──> 0x000cec48      ba0a40b9       ldr w26, [x21, 8]           ; aav.0x000000dc
+│ │││   │                                                              ; 0xdc
+│ │││   │   0x000cec4c      9f021a6b       cmp w20, w26
+│ │││  ┌──< 0x000cec50      4d010054       b.le 0xcec78
+│ │││  ││   0x000cec54      88021a0b       add w8, w20, w26
+│ │││  ││   0x000cec58      09050051       sub w9, w8, 1
+│ │││  ││   0x000cec5c      2809da1a       udiv w8, w9, w26
+│ │││  ││   0x000cec60      1ffd0371       cmp w8, 0xff
+│ │││ ┌───< 0x000cec64      6d000054       b.le 0xcec70
+│ │││ │││   ; CODE XREFS from sym.ikcp_send @ 0xceb98, 0xcebac, 0xcecb8, 0xcecc4, 0xcedb0
+│ └─└┌────> 0x000cec68      20008012       movn w0, 0x1
+│  │┌─────< 0x000cec6c      5e000014       b 0xcede4
+│  ││╎│││   ; CODE XREF from sym.ikcp_send @ 0xcec64
+│  ││╎└───> 0x000cec70      5f03096b       cmp w26, w9
+│  ││╎┌───< 0x000cec74      290b0054       b.ls 0xcedd8
+│  ││╎│││   ; CODE XREF from sym.ikcp_send @ 0xcec50
+│  ││╎│└──> 0x000cec78      28008052       movz w8, 0x1
+│  ││╎│ │   ; CODE XREF from sym.ikcp_send @ 0xceddc
+│  ││╎│┌──> 0x000cec7c      090800b0       adrp x9, 0x1cf000
+│  ││╎│╎│   0x000cec80      b9220291       add x25, x21, 0x88
+│  ││╎│╎│   0x000cec84      3be545f9       ldr x27, aav.0x000000d0
+│ ┌───────< 0x000cec88      1b0600b4       cbz x27, 0xced48
+│ │││╎│╎│   0x000cec8c      1c050051       sub w28, w8, 1
+│ │││╎│╎│   ; DATA XREF from section..gcc_except_table @ +0xc3c
+│ │││╎│╎│   0x000cec90      9f021a6b       cmp w20, w26
+│ │││╎│╎│   0x000cec94      5ac3941a       csel w26, w26, w20, gt
+│ │││╎│╎│   0x000cec98      577f4093       sxtw x23, w26
+│ │││╎│╎│   0x000cec9c      e0420191       add x0, x23, 0x50
+│ ────────< 0x000ceca0      fb0000b4       cbz x27, 0xcecbc
+│ │││╎│╎│   ; CODE XREF from sym.ikcp_send @ 0xced40
+│ ────────> 0x000ceca4      60033fd6       blr x27
+│ │││╎│╎│   0x000ceca8      080800b0       adrp x8, 0x1cf000
+│ │││╎│╎│   0x000cecac      f80300aa       mov x24, x0
+│ │││╎│╎│   0x000cecb0      1be545f9       ldr x27, [x8, aav.0x00000bc8] ; 0xcf
+│ ────────< 0x000cecb4      b80000b5       cbnz x24, 0xcecc8
+│ ────────< 0x000cecb8      ecffff17       b 0xcec68
+│ │││╎│╎│   ; CODE XREFS from sym.ikcp_send @ 0xceca0, 0xced44
+│ ────────> 0x000cecbc      a9a60394       bl sym.imp.malloc           ;  void *malloc(size_t size)
+│ │││╎│╎│   0x000cecc0      f80300aa       mov x24, x0
+│ ────────< 0x000cecc4      38fdffb4       cbz x24, 0xcec68
+│ │││╎│╎│   ; CODE XREF from sym.ikcp_send @ 0xcecb4
+│ ────────< 0x000cecc8      f60000b4       cbz x22, 0xcece4
+│ │││╎│╎│   0x000ceccc      9f060071       cmp w20, 1
+│ ────────< 0x000cecd0      ab000054       b.lt 0xcece4
+│ │││╎│╎│   0x000cecd4      00230191       add x0, x24, 0x48           ; void *s1
+│ │││╎│╎│   0x000cecd8      e10316aa       mov x1, x22                 ; const void *s2
+│ │││╎│╎│   0x000cecdc      e20317aa       mov x2, x23                 ; size_t n
+│ │││╎│╎│   0x000cece0      c4a20394       bl sym.imp.memcpy           ; void *memcpy(void *s1, const void *s2, size_t n)
+│ │││╎│╎│   ; CODE XREFS from sym.ikcp_send @ 0xcecc8, 0xcecd0
+│ ────────> 0x000cece4      a8f240b9       ldr w8, [x21, 0xf0]         ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000cece8      1acf0529       stp w26, w19, [x24, 0x2c]
+│ │││╎│╎│   0x000cecec      aa6a40b9       ldr w10, [x21, 0x68]        ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000cecf0      a94a40f9       ldr x9, [x21, 0x90]         ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000cecf4      b84a00f9       str x24, [x21, 0x90]
+│ │││╎│╎│   0x000cecf8      1f010071       cmp w8, 0
+│ │││╎│╎│   0x000cecfc      88039f1a       csel w8, w28, wzr, eq
+│ │││╎│╎│   0x000ced00      4a050011       add w10, w10, 1
+│ │││╎│╎│   0x000ced04      192700a9       stp x25, x9, [x24]
+│ │││╎│╎│   0x000ced08      380100f9       str x24, [x9]
+│ │││╎│╎│   0x000ced0c      081b00b9       str w8, [x24, 0x18]
+│ │││╎│╎│   0x000ced10      aa6a00b9       str w10, [x21, 0x68]
+│ ────────< 0x000ced14      7c060034       cbz w28, 0xcede0
+│ │││╎│╎│   0x000ced18      94021a4b       sub w20, w20, w26
+│ │││╎│╎│   0x000ced1c      ba0a40b9       ldr w26, [x21, 8]           ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000ced20      c802178b       add x8, x22, x23
+│ │││╎│╎│   0x000ced24      df0200f1       cmp x22, 0
+│ │││╎│╎│   0x000ced28      16119f9a       csel x22, x8, xzr, ne
+│ │││╎│╎│   0x000ced2c      9c070051       sub w28, w28, 1
+│ │││╎│╎│   0x000ced30      9f021a6b       cmp w20, w26
+│ │││╎│╎│   0x000ced34      5ac3941a       csel w26, w26, w20, gt
+│ │││╎│╎│   0x000ced38      577f4093       sxtw x23, w26
+│ │││╎│╎│   0x000ced3c      e0420191       add x0, x23, 0x50
+│ ────────< 0x000ced40      3bfbffb5       cbnz x27, 0xceca4
+│ ────────< 0x000ced44      deffff17       b 0xcecbc
+│ │││╎│╎│   ; CODE XREF from sym.ikcp_send @ 0xcec88
+│ └───────> 0x000ced48      1b050051       sub w27, w8, 1
+│ ┌───────< 0x000ced4c      14000014       b 0xced9c
+│ │││╎│╎│   ; CODE XREFS from sym.ikcp_send @ 0xcedb8, 0xcedc0, 0xcedd4
+│ ────────> 0x000ced50      a8f240b9       ldr w8, [x21, 0xf0]         ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000ced54      ca02188b       add x10, x22, x24
+│ │││╎│╎│   0x000ced58      a94a40f9       ldr x9, [x21, 0x90]         ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000ced5c      94021c4b       sub w20, w20, w28
+│ │││╎│╎│   0x000ced60      fcce0529       stp w28, w19, [x23, 0x2c]
+│ │││╎│╎│   0x000ced64      1f010071       cmp w8, 0
+│ │││╎│╎│   0x000ced68      a86a40b9       ldr w8, [x21, 0x68]         ; aav.0x000000dc
+│ │││╎│╎│                                                              ; 0xdc
+│ │││╎│╎│   0x000ced6c      f92600a9       stp x25, x9, [x23]
+│ │││╎│╎│   0x000ced70      370100f9       str x23, [x9]
+│ │││╎│╎│   0x000ced74      69039f1a       csel w9, w27, wzr, eq
+│ │││╎│╎│   0x000ced78      df0200f1       cmp x22, 0
+│ │││╎│╎│   0x000ced7c      08050011       add w8, w8, 1
+│ │││╎│╎│   0x000ced80      56119f9a       csel x22, x10, xzr, ne
+│ │││╎│╎│   0x000ced84      7b070051       sub w27, w27, 1
+│ │││╎│╎│   0x000ced88      7f070031       cmn w27, 1
+│ │││╎│╎│   0x000ced8c      e91a00b9       str w9, [x23, 0x18]
+│ │││╎│╎│   0x000ced90      b74a00f9       str x23, [x21, 0x90]
+│ │││╎│╎│   0x000ced94      a86a00b9       str w8, [x21, 0x68]
+│ ────────< 0x000ced98      40020054       b.eq 0xcede0
+│ │││╎│╎│   ; CODE XREF from sym.ikcp_send @ 0xced4c
+│ └───────> 0x000ced9c      9f021a6b       cmp w20, w26
+│  ││╎│╎│   0x000ceda0      5cc3941a       csel w28, w26, w20, gt
+│  ││╎│╎│   0x000ceda4      987f4093       sxtw x24, w28
+│  ││╎│╎│   0x000ceda8      00430191       add x0, x24, 0x50           ; size_t size
+│  ││╎│╎│   0x000cedac      6da60394       bl sym.imp.malloc           ;  void *malloc(size_t size)
+│  ││└────< 0x000cedb0      c0f5ffb4       cbz x0, 0xcec68
+│  ││ │╎│   0x000cedb4      f70300aa       mov x23, x0
+│ ────────< 0x000cedb8      d6fcffb4       cbz x22, 0xced50
+│  ││ │╎│   0x000cedbc      9f060071       cmp w20, 1
+│ ────────< 0x000cedc0      8bfcff54       b.lt 0xced50
+│  ││ │╎│   0x000cedc4      e0220191       add x0, x23, 0x48           ; void *s1
+│  ││ │╎│   0x000cedc8      e10316aa       mov x1, x22                 ; const void *s2
+│  ││ │╎│   0x000cedcc      e20318aa       mov x2, x24                 ; size_t n
+│  ││ │╎│   0x000cedd0      88a20394       bl sym.imp.memcpy           ; void *memcpy(void *s1, const void *s2, size_t n)
+│ ────────< 0x000cedd4      dfffff17       b 0xced50
+│  ││ │╎│   ; CODE XREF from sym.ikcp_send @ 0xcec74
+│  ││ └───> 0x000cedd8      1f050071       cmp w8, 1
+│  ││  └──< 0x000ceddc      0af5ff54       b.ge 0xcec7c
+│  ││   │   ; CODE XREFS from sym.ikcp_send @ 0xcec38, 0xcec44, 0xced14, 0xced98
+│ ─└──────> 0x000cede0      e0031f2a       mov w0, wzr
+│   │   │   ; CODE XREFS from sym.ikcp_send @ 0xceba0, 0xcec6c
+│   └───└─> 0x000cede4      f44f45a9       ldp x20, x19, [var_50h]
+│           0x000cede8      f65744a9       ldp x22, x21, [var_40h]
+│           0x000cedec      f85f43a9       ldp x24, x23, [var_30h]
+│           0x000cedf0      fa6742a9       ldp x26, x25, [var_20h]
+│           0x000cedf4      fc6f41a9       ldp x28, x27, [var_10h]
+│           0x000cedf8      fd7bc6a8       ldp x29, x30, [sp], 0x60
+└           0x000cedfc      c0035fd6       ret

@@ -1,0 +1,6 @@
+            ; UNKNOWN XREF from aav.0x00011018 @ +0x130
+┌ 16: sym.KCP_GetZipControlCode ();
+│           0x000ca7d0      e80700d0       adrp x8, 0x1c8000
+│           0x000ca7d4      084943f9       ldr x8, [x8, aav.0x00000690] ; 0xcf
+│           0x000ca7d8      000140b9       ldr w0, [x8]                ; 0xcf
+└           0x000ca7dc      c0035fd6       ret

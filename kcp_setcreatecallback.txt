@@ -1,0 +1,7 @@
+            ; UNKNOWN XREF from aav.0x00004574 @ +0x4fc
+┌ 16: sym.KCP_SetCreateCSocketCallback (int64_t arg1);
+│           ; arg int64_t arg1 @ x0
+│           0x000ca7e0      e80700d0       adrp x8, 0x1c8000
+│           0x000ca7e4      08f942f9       ldr x8, [x8, aav.0x000005f0] ; 0xcf
+│           0x000ca7e8      000100f9       str x0, [x8]                ; arg1
+└           0x000ca7ec      c0035fd6       ret
