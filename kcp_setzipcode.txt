@@ -1,7 +1,0 @@
-            ; UNKNOWN XREF from aav.0x00006000 @ +0x1068
-┌ 16: sym.KCP_SetZipControlCode (int64_t arg1);
-│           ; arg int64_t arg1 @ x0
-│           0x000ca7c0      e80700d0       adrp x8, 0x1c8000
-│           0x000ca7c4      084943f9       ldr x8, [x8, aav.0x00000690] ; 0xcf
-│           0x000ca7c8      000100b9       str w0, [x8]                ; arg1
-└           0x000ca7cc      c0035fd6       ret

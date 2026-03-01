@@ -1,6 +1,0 @@
-            ; UNKNOWN XREF from aav.0x00006000 @ +0x1e0
-┌ 16: sym.KCP_IsZipEnabled ();
-│           0x000ca7b0      e80700d0       adrp x8, 0x1c8000
-│           0x000ca7b4      084543f9       ldr x8, [x8, aav.0x00000688] ; 0xcf
-│           0x000ca7b8      00014039       ldrb w0, [x8]               ; 0xcf
-└           0x000ca7bc      c0035fd6       ret
