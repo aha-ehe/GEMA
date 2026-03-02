@@ -88,151 +88,386 @@ Always use this tool when creating or modifying a plan.
 * Before completing your work with the submit tool, you **must** call `pre_commit_instructions` and follow its instructions to complete pre commit steps. Then call `submit` using a short, descriptive branch name. The commit message should follow standard conventions: a short subject line (50 chars max), a blank line, and a more detailed body if necessary.
 * If you already submitted a change previously, you should continue using the same branch name.
 
-## Tool Definitions:
-
-{
-  "list_files": {
+TOOL CALLS JSON:
+[
+  {
+    "name": "list_files",
     "description": "lists all files and directories under the given directory (defaults to repo root). Directories in the output will have a trailing slash (e.g., 'src/'). The output is that same as from the Unix command `ls -a -1F --group-directories-first <path>`.",
     "parameters": {
+      "type": "object",
       "properties": {
         "path": {
-          "description": "The directory path to list files from. Defaults to the root of the repo.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The directory path to list files from. Defaults to the root of the repo."
         }
-      },
-      "type": "OBJECT"
+      }
     }
   },
-  "read_file": {
+  {
+    "name": "read_file",
     "description": "Reads the content of the specified file in the repo. It will return an error if the file does not exist.",
     "parameters": {
+      "type": "object",
       "properties": {
         "filepath": {
-          "description": "The path of the file to read, relative to the repo root.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The path of the file to read, relative to the repo root."
         }
       },
       "required": [
         "filepath"
-      ],
-      "type": "OBJECT"
+      ]
     }
   },
-  "write_file": {
+  {
+    "name": "write_file",
     "description": "Use this to create a new file or overwrite an existing file.",
     "parameters": {
+      "type": "object",
       "properties": {
-        "content": {
-          "description": "The content to write to the file.",
-          "type": "STRING"
-        },
         "filepath": {
-          "description": "The path of the file to create or overwrite.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The path of the file to create or overwrite."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content to write to the file."
         }
       },
       "required": [
         "filepath",
         "content"
-      ],
-      "type": "OBJECT"
+      ]
     }
   },
-  "run_in_bash_session": {
-    "description": "Runs the given bash command in the sandbox. Successive invocations of this tool use the same bash session, however **all invocations of this tool run from the repository root directory**. You may still access the entire sandbox, but you must formulate commands with this in mind. You are expected to use this tool to install necessary dependencies, compile code, run tests, and run bash commands that you may need to accomplish your task. Do not tell the user to perform these actions; it is your responsibility.",
+  {
+    "name": "run_in_bash_session",
+    "description": "Runs the given bash command in the sandbox. Successive invocations of this tool use the same bash session, however all invocations of this tool run from the repository root directory. You may still access the entire sandbox, but you must formulate commands with this in mind. You are expected to use this tool to install necessary dependencies, compile code, run tests, and run bash commands that you may need to accomplish your task. Do not tell the user to perform these actions; it is your responsibility.",
     "parameters": {
+      "type": "object",
       "properties": {
         "command": {
-          "description": "The bash command to run.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The bash command to run."
         }
       },
       "required": [
         "command"
-      ],
-      "type": "OBJECT"
+      ]
     }
   },
-  "set_plan": {
+  {
+    "name": "set_plan",
     "description": "Use it after initial exploration to set the first plan, and later as needed if the plan is updated.",
     "parameters": {
+      "type": "object",
       "properties": {
         "plan": {
-          "description": "The plan to solve the issue, in Markdown format.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The plan to solve the issue, in Markdown format."
         }
       },
       "required": [
         "plan"
-      ],
-      "type": "OBJECT"
+      ]
     }
   },
-  "submit": {
-    "description": "Commits the current code with a title and description (which should both be git-agnostic) and requests user approval to push to their branch. **Call this only when you are confident the code changes are complete by running all relevant tests and ensuring they pass OR when the user asks you to commit, push, submit, or otherwise finalize the code.**",
+  {
+    "name": "submit",
+    "description": "Commits the current code with a title and description (which should both be git-agnostic) and requests user approval to push to their branch. Call this only when you are confident the code changes are complete by running all relevant tests and ensuring they pass OR when the user asks you to commit, push, submit, or otherwise finalize the code.",
     "parameters": {
+      "type": "object",
       "properties": {
         "branch_name": {
-          "description": "The name of the branch to commit to.",
-          "type": "STRING"
-        },
-        "commit_message": {
-          "description": "The commit message.",
-          "type": "STRING"
-        },
-        "description": {
-          "description": "The description of the submission.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The name of the branch to commit to."
         },
         "title": {
-          "description": "The title of the submission.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The title of the submission."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the submission."
+        },
+        "commit_message": {
+          "type": "string",
+          "description": "The commit message."
         }
       },
       "required": [
         "branch_name",
-        "commit_message",
         "title",
-        "description"
-      ],
-      "type": "OBJECT"
+        "description",
+        "commit_message"
+      ]
     }
   },
-  "request_user_input": {
+  {
+    "name": "request_user_input",
     "description": "Asks the user a question or asks for input and waits for a response.",
     "parameters": {
+      "type": "object",
       "properties": {
         "message": {
-          "description": "The question or prompt for the user.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The question or prompt for the user."
         }
       },
       "required": [
         "message"
-      ],
-      "type": "OBJECT"
+      ]
     }
   },
-  "message_user": {
-    "description": "The statement sent to the user to respond to a question or feedback, or provide an update to the user. **Do NOT use this to ask questions** - use `request_user_input` instead when you need to ask the user a question. Set `continue_working` to `True` if you intend to perform more actions immediately after this message. Set to `False` if you are finished with your turn and are waiting for information about your next step.",
+  {
+    "name": "message_user",
+    "description": "The statement sent to the user to respond to a question or feedback, or provide an update to the user. Do NOT use this to ask questions - use request_user_input instead when you need to ask the user a question. Set continue_working to True if you intend to perform more actions immediately after this message. Set to False if you are finished with your turn and are waiting for information about your next step.",
     "parameters": {
+      "type": "object",
       "properties": {
-        "continue_working": {
-          "description": "Whether to continue working after sending the message.",
-          "type": "BOOLEAN"
-        },
         "message": {
-          "description": "The message to send to the user.",
-          "type": "STRING"
+          "type": "string",
+          "description": "The message to send to the user."
+        },
+        "continue_working": {
+          "type": "boolean",
+          "description": "Whether to continue working after sending the message."
         }
       },
       "required": [
         "message"
-      ],
-      "type": "OBJECT"
+      ]
+    }
+  },
+  {
+    "name": "delete_file",
+    "description": "Deletes the specified file. If the file does not exist, it will return an error message.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "filepath": {
+          "type": "string",
+          "description": "The path of the file to delete."
+        }
+      },
+      "required": [
+        "filepath"
+      ]
+    }
+  },
+  {
+    "name": "rename_file",
+    "description": "renames and/or moves files and directories. It will return an error message if filepath is missing, if new_filepath already exists, or if the target parent directory does not exist.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "filepath": {
+          "type": "string",
+          "description": "The original path of the file or directory."
+        },
+        "new_filepath": {
+          "type": "string",
+          "description": "The new path for the file or directory."
+        }
+      },
+      "required": [
+        "filepath",
+        "new_filepath"
+      ]
+    }
+  },
+  {
+    "name": "reset_all",
+    "description": "Resets the entire codebase to its original state. Use this tool to undo all your changes and start over.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "restore_file",
+    "description": "Restores the given file to its original state. Use this tool to undo all your changes to a specific file.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "filepath": {
+          "type": "string",
+          "description": "The path of the file to restore."
+        }
+      },
+      "required": [
+        "filepath"
+      ]
+    }
+  },
+  {
+    "name": "view_image",
+    "description": "Loads the image from the provided URL, allowing you to view and analyze its contents. You should use this tool anytime the user provides you a URL that appears to point to an image based on context (e.g. ends in .jpg, .png, .webp). You may also use this tool to view image URLs you come across in other places, such as output from view_text_website.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the image to view."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    }
+  },
+  {
+    "name": "view_text_website",
+    "description": "Fetches the content of a website as plain text. Useful for accessing documentation or external resources. This tool only works when the sandbox has internet access.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the website to fetch."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    }
+  },
+  {
+    "name": "read_image_file",
+    "description": "Reads the image file at the filepath into your context. Use this if you need to see image files on the machine, like screenshots.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "filepath": {
+          "type": "string",
+          "description": "The path of the image file to read."
+        }
+      },
+      "required": [
+        "filepath"
+      ]
+    }
+  },
+  {
+    "name": "frontend_verification_instructions",
+    "description": "Returns instructions on how to write a Playwright script to verify frontend web applications and generate screenshots of your changes.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "frontend_verification_complete",
+    "description": "Use this tool to indicate that the frontend changes have been verified.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "screenshot_path": {
+          "type": "string",
+          "description": "The path to the screenshot of the frontend changes."
+        },
+        "additional_media_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional list of paths to additional media files (e.g., recorded .webm videos) to include alongside the screenshot."
+        }
+      },
+      "required": [
+        "screenshot_path"
+      ]
+    }
+  },
+  {
+    "name": "start_live_preview_instructions",
+    "description": "Returns instructions on how to start a live preview server.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "google_search",
+    "description": "Online google search to retrieve the most up to date information. The result contains top urls with title and snippets. Use view_text_website to retrieve the full content of the relevant websites.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query to search for."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "initiate_memory_recording",
+    "description": "Use this tool to start recording information that will be useful for future tasks.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "pre_commit_instructions",
+    "description": "Get instructions on a list of pre commit steps you need to do before submit. Always call this function when you are in pre commit step or before submit.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "read_pr_comments",
+    "description": "Reads any pending pull request comments that the user has sent for you to address.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "reply_to_pr_comments",
+    "description": "Use this tool to reply to comments. The input must be a JSON string representing a list of objects, where each object has a \"comment_id\" and \"reply\" key.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "replies": {
+          "type": "string",
+          "description": "The replies to the comments."
+        }
+      },
+      "required": [
+        "replies"
+      ]
+    }
+  },
+  {
+    "name": "request_code_review",
+    "description": "Use this tool to request a code review for the current change.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "plan_step_complete",
+    "description": "Marks the current plan step as complete, with a message explaining what actions you took to do so. Important: Before calling this tool, you must have already verified that your changes were applied correctly (e.g., by using read_files or ls). Only call this when you have successfully completed all items needed for this plan step.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A succinct, descriptive message explaining what actions were taken. This message is user-visible."
+        }
+      },
+      "required": [
+        "message"
+      ]
     }
   }
-}
+]
 
-## API Keys:
-(None found in current environment)
+API KEYS:
+(No API keys were found in the sandbox environment)
